@@ -8,7 +8,17 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Adding btn-xs class
+.btn.btn-xs {
+  @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $font-size-sm, $input-btn-line-height-xs, $btn-border-radius-sm);
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.post {
+  background-color: $bg-post;
+}
+
