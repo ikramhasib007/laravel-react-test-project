@@ -6,6 +6,9 @@
  */
 
 require('./bootstrap');
+window.axios = require('axios');
+axios.defaults.baseURL = 'http://localhost:8000';
+
 
 /**
  * Next, we will create a fresh React component instance and attach it to
