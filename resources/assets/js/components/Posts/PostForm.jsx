@@ -1,6 +1,8 @@
 import React from 'react';
 import onClickOutside from 'react-onclickoutside';
+import {connect} from 'react-redux';
 import propTypes from 'prop-types';
+import getVisiblePosts from '../../selectors/posts';
 
 const postFromPropTypes = {
     categories: propTypes.array.isRequired,
@@ -18,16 +20,19 @@ const defaultProps = {
 class PostForm extends React.Component {
     constructor(props) {
         super(props);
+        this.title = React.createRef();
         this.state = { 
             title: this.props.title,
             category_id: this.props.category_id,
             body: this.props.body,
+            titleUnique: '',
             error: ''
         }
 
         this.onCategoryChange = this.onCategoryChange.bind(this);
         this.onTitleChange = this.onTitleChange.bind(this);
         this.onBodyChange = this.onBodyChange.bind(this);
+        this.onTitleBlur = this.onTitleBlur.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -48,7 +53,19 @@ class PostForm extends React.Component {
 
     onTitleChange(e) {
         e.persist();
-        this.setState(() => ({title: e.target.value}));
+        this.setState(() => ({
+            title: e.target.value,
+            titleUnique: ''
+        }));
+    }
+    onTitleBlur(e) {
+        for(let i=0;i<this.props.posts.length;i++){
+            let post = this.props.posts[i];
+            if(Object.values(post).includes(e.target.value)){
+                this.setState(() => ({titleUnique: 'Unique field'}));
+                break;
+            }
+        }
     }
 
     onBodyChange(e) {
@@ -65,17 +82,21 @@ class PostForm extends React.Component {
         if(!this.state.title || !this.state.category_id || !this.state.body) {
             this.setState(() => ({error: 'This field is required'}));
         } else {
-            this.setState(() => ({
-                title: '',
-                category_id: 0,
-                body: '',
-                error: ''
-            }));
-            this.props.onSubmit({
-                title: this.state.title,
-                category_id: this.state.category_id,
-                body: this.state.body
-            });
+            if(!this.state.titleUnique){
+                this.setState(() => ({
+                    title: '',
+                    category_id: 0,
+                    body: '',
+                    error: ''
+                }));
+                this.props.onSubmit({
+                    title: this.state.title,
+                    category_id: this.state.category_id,
+                    body: this.state.body
+                });
+            } else {
+                this.title.current.focus();
+            }
         }
     }
 
@@ -85,12 +106,15 @@ class PostForm extends React.Component {
                 <div className="form-group">
                     <input 
                         type="text" 
-                        className={this.state.error && !this.state.title ? 'form-control is-invalid' : 'form-control'}
+                        className={(this.state.error && !this.state.title) || this.state.titleUnique ? 'form-control is-invalid' : 'form-control'}
                         value={this.state.title}
                         onChange={this.onTitleChange}
+                        onBlur={this.onTitleBlur}
+                        ref={this.title}
                         placeholder="Title"
                     />
                     {(this.state.error && !this.state.title) && <div className="invalid-feedback">{this.state.error}</div>}
+                    {(this.state.titleUnique) && <div className="invalid-feedback">{this.state.titleUnique}</div>}
                 </div>
                 <div className="form-group">
                     <select 
@@ -130,5 +154,8 @@ class PostForm extends React.Component {
 
 PostForm.propTypes = postFromPropTypes;
 PostForm.defaultProps = defaultProps;
- 
-export default onClickOutside(PostForm);
+
+const mapStateToProps = (state) => ({
+    posts: getVisiblePosts(state.posts, state.filters)
+});
+export default connect(mapStateToProps)(onClickOutside(PostForm));

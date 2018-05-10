@@ -8,14 +8,13 @@ export const startAddPost = (postData = {}) => {
   const {
     title = 'post title',
     category_id = 0,
-    body = 'post body',
-    created_at = 0
+    body = 'post body'
   } = postData;
-  const post = {title, category_id, body, created_at};
+  const post = {title, category_id, body};
   return (dispatch) => {
     return axios.post('/api/posts', post).then((response) => {
       console.log(response);
-      dispatch(addPost(post));
+      dispatch(addPost(response.data));
     }).catch((error) => {
       console.log(error.message);
     });
