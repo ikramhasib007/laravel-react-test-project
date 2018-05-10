@@ -15,21 +15,11 @@ class Posts extends React.Component {
       posts: this.props.posts || [],
       updates: {}
     }
-    console.log('-------props------',props.posts);
+    
     this.removePostHandle = this.removePostHandle.bind(this);
     this.editPostHandle = this.editPostHandle.bind(this);
     this.updateSuccessful = this.updateSuccessful.bind(this);
   }  
-  // componentWillMount() {
-  //   axios.all([this.getCategories(), this.getPosts()]).then(axios.spread((categories, posts) => {
-  //     this.setState(()=>({
-  //       categories:categories.data,
-  //       posts: posts.data
-  //     }));
-  //   })).catch((error)=>{
-  //     console.log(error.message);
-  //   });
-  // }
 
   removePostHandle(id) {
     console.log(id);
@@ -49,14 +39,6 @@ class Posts extends React.Component {
   updateSuccessful() {
     console.log('updateSuccessful');
     this.setState(() => ({updates: {}}));
-  }
-
-  getCategories() {
-    return axios.get('/api/category');
-  }
-
-  getPosts() {
-    return axios.get('/api/posts');
   }
 
   render() {
@@ -95,4 +77,5 @@ const mapStateToProps = (state) => ({
   posts: getVisiblePosts(state.posts, state.filters),
   categories: getVisibleCategories(state.categories, state.filters)
 });
+
 export default connect(mapStateToProps)(Posts);

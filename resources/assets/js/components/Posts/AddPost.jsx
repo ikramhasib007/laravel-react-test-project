@@ -1,19 +1,17 @@
 import React from 'react';
 import PostForm from './PostForm';
+import {connect} from 'react-redux';
+import { startAddPost } from '../../actions/posts';
 
-function AddPost({categories}) {
+function AddPost({categories, dispatch}) {
   return (
       <PostForm 
         categories={categories} 
         onSubmit={(post) => {
-            axios.post('/api/posts', post).then((response) => {
-                console.log(response);
-            }).catch((error) => {
-                console.log(error.message);
-            });
+            dispatch(startAddPost(post));
         }}
       />
     );
 }
 
-export default AddPost;
+export default connect()(AddPost);

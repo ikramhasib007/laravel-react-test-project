@@ -1,5 +1,8 @@
 import React from 'react';
 import PostForm from './PostForm';
+import {connect} from 'react-redux';
+import { startEditPost } from '../../actions/posts';
+
 
 class EditPost extends React.Component {
     constructor(props) {
@@ -25,22 +28,17 @@ class EditPost extends React.Component {
         return (
             <PostForm 
               categories={this.props.categories}
-              {...this.state.updates} 
+              {...this.props.post} 
               onSubmit={(post) => {
-                  console.log(post);
-                  axios.put(`/api/posts/${this.state.updates.id}`, post).then((response) => {
-                    console.log(response);  
-                    this.setState(() => ({
-                          completed: true
-                      }));
-                      this.props.updated()
-                  }).catch((error) => {
-                      console.log(error);
-                  });
+                  this.props.dispatch(startEditPost(this.props.updates.id, post))
+                  this.props.updated()
               }}
             />
         );
     }
 }
+const mapStateToProps = (state, props) => ({
+    post: state.posts.find((post) => post.id === props.updates.id)
+});
 
-export default EditPost;
+export default connect(mapStateToProps)(EditPost);
