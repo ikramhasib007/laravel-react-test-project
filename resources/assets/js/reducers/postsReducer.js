@@ -1,6 +1,7 @@
 // Posts Reducer
 const postsReducerDefaultState = [];
 const postsReducer = (state=postsReducerDefaultState, action) => {
+  console.log('postsReducer');
   switch(action.type) {
     case 'ADD_POST':
       return [...state, action.post];
@@ -17,6 +18,8 @@ const postsReducer = (state=postsReducerDefaultState, action) => {
           return post;
         }
       });
+    case 'SET_POSTS':
+      return action.posts;
     default:
       return state;
   }

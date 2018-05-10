@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import configureStore from '../../store/configureStore';
+import {connect, Provider} from 'react-redux';
+import {startSetPosts} from '../../actions/posts';
+import getVisiblePosts from '../../selectors/posts';
 import AddPost from './AddPost';
 import EditPost from './EditPost';
 import Post from './Post';
@@ -87,8 +91,22 @@ class Posts extends React.Component {
   }
 }
 
-export default Posts;
+const store = configureStore();
+
+// const myPosts = store.getState();
+// const getAllVisiblePosts = getVisiblePosts(myPosts.posts, myPosts.filters);
+// console.log(getAllVisiblePosts);
+
+export default connect()(Posts);
+
+const jsx = (
+  <Provider store={store}>
+    <Posts />
+  </Provider>
+);
+
+store.dispatch(startSetPosts());
 
 if (document.getElementById("app")) {
-  ReactDOM.render(<Posts/>, document.getElementById("app"));
+  ReactDOM.render(jsx, document.getElementById("app"));
 }
