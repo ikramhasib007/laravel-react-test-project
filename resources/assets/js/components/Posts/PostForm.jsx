@@ -60,9 +60,8 @@ class PostForm extends React.Component {
     }
     onTitleBlur(e) {
         for(let i=0;i<this.props.posts.length;i++){
-            let post = this.props.posts[i];
-            console.log(post.title);
-            if(post.title.toLowerCase().includes(e.target.value.toLowerCase())){
+            let title = this.props.posts[i].title.toLowerCase();
+            if(title.trim() === e.target.value.toLowerCase().trim()){
                 this.setState(() => ({titleUnique: 'The title cannot be duplicate'}));
                 break;
             }

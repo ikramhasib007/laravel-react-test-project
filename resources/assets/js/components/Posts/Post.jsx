@@ -16,7 +16,7 @@ function Post(props) {
       </blockquote>
       <button 
         className="btn btn-danger btn-xs ml-1 mt-1"
-        onClick={() => props.dispatch(startRemovePost(props.post.id))}
+        onClick={() => {props.feedback(); props.dispatch(startRemovePost(props.post.id))}}
       >X</button>
       </dt>
       <dd className="col-sm-12 mb-0">

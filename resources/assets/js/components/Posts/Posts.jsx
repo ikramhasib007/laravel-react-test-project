@@ -5,6 +5,7 @@ import getVisiblePosts from '../../selectors/posts';
 import getVisibleCategories from '../../selectors/categories';
 import AddPost from './AddPost';
 import EditPost from './EditPost';
+import PostFilter from './PostFilter';
 import Post from './Post';
 
 class Posts extends React.Component {
@@ -34,6 +35,7 @@ class Posts extends React.Component {
           key={i}
           post={post}
           editPostHandle={this.editPostHandle}
+          feedback={this.updateFeedback}
           category={this.props.categories.find(category => post.category_id === category.id)}
         />
       ))
@@ -51,6 +53,7 @@ class Posts extends React.Component {
           }
         </div>
         <div className="col-md-6">
+          <PostFilter />
           {post}
         </div>
       </div>
