@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import getVisiblePosts from '../../selectors/posts';
+import getVisibleCategories from '../../selectors/categories';
 import AddPost from './AddPost';
 import EditPost from './EditPost';
 import Post from './Post';
@@ -10,34 +11,35 @@ class Posts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
-      posts: [],
+      categories: this.props.categories || [],
+      posts: this.props.posts || [],
       updates: {}
     }
-    console.log('-------props------',props);
+    console.log('-------props------',props.posts);
     this.removePostHandle = this.removePostHandle.bind(this);
     this.editPostHandle = this.editPostHandle.bind(this);
     this.updateSuccessful = this.updateSuccessful.bind(this);
   }  
-  componentWillMount() {
-    axios.all([this.getCategories(), this.getPosts()]).then(axios.spread((categories, posts) => {
-      this.setState(()=>({
-        categories:categories.data,
-        posts: posts.data
-      }));
-    })).catch((error)=>{
-      console.log(error.message);
-    });
-  }
+  // componentWillMount() {
+  //   axios.all([this.getCategories(), this.getPosts()]).then(axios.spread((categories, posts) => {
+  //     this.setState(()=>({
+  //       categories:categories.data,
+  //       posts: posts.data
+  //     }));
+  //   })).catch((error)=>{
+  //     console.log(error.message);
+  //   });
+  // }
 
   removePostHandle(id) {
-    axios.delete(`/api/posts/${id}`).then((response) => {
-      this.setState(() => ({
-        posts: this.state.posts.filter(post => post.id !== id)
-      }));
-    }).catch((error) => {
-      console.log(error.message);
-    });
+    console.log(id);
+    // axios.delete(`/api/posts/${id}`).then((response) => {
+    //   this.setState(() => ({
+    //     posts: this.state.posts.filter(post => post.id !== id)
+    //   }));
+    // }).catch((error) => {
+    //   console.log(error.message);
+    // });
   }
 
   editPostHandle(post) {
@@ -65,7 +67,7 @@ class Posts extends React.Component {
           post={post}
           removePostHandle={this.removePostHandle}
           editPostHandle={this.editPostHandle}
-          categoryName={this.state.categories.find(category => post.category_id === category.id).name}
+          category={this.state.categories.find(category => post.category_id === category.id)}
         />
       ))
     );
@@ -90,6 +92,7 @@ class Posts extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  posts: getVisiblePosts(state.posts, state.filters)
+  posts: getVisiblePosts(state.posts, state.filters),
+  categories: getVisibleCategories(state.categories, state.filters)
 });
 export default connect(mapStateToProps)(Posts);
