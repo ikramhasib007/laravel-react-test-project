@@ -15,15 +15,15 @@ class Posts extends React.Component {
     }
     
     this.editPostHandle = this.editPostHandle.bind(this);
-    this.updateSuccessful = this.updateSuccessful.bind(this);
+    this.updateFeedback = this.updateFeedback.bind(this);
   }  
 
   editPostHandle(post) {
     this.setState(() => ({updates: post}));
   }
 
-  updateSuccessful() {
-    console.log('updateSuccessful');
+  updateFeedback() {
+    // console.log('updateFeedback');
     this.setState(() => ({updates: {}}));
   }
 
@@ -46,7 +46,7 @@ class Posts extends React.Component {
             <EditPost 
               categories={this.props.categories} 
               id={this.state.updates.id}
-              updated={this.updateSuccessful}
+              feedback={this.updateFeedback}
             />
           }
         </div>

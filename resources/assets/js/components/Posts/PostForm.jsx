@@ -8,12 +8,12 @@ const postFromPropTypes = {
     categories: propTypes.array.isRequired,
     onSubmit: propTypes.func.isRequired,
     title: propTypes.string,
-    category_id: propTypes.number,
+    // category_id: propTypes.number,
     body: propTypes.string
 };
 const defaultProps = {
     title: '',
-    category_id: 0,
+    // category_id: 0,
     body: ''
 };
 
@@ -61,8 +61,9 @@ class PostForm extends React.Component {
     onTitleBlur(e) {
         for(let i=0;i<this.props.posts.length;i++){
             let post = this.props.posts[i];
-            if(Object.values(post).includes(e.target.value)){
-                this.setState(() => ({titleUnique: 'Unique field'}));
+            console.log(post.title);
+            if(post.title.toLowerCase().includes(e.target.value.toLowerCase())){
+                this.setState(() => ({titleUnique: 'The title cannot be duplicate'}));
                 break;
             }
         }
@@ -73,8 +74,10 @@ class PostForm extends React.Component {
         this.setState(() => ({body: e.target.value}));
     }
 
-    handleClickOutside () {
-        this.setState(() => ({error: ''}));
+    handleClickOutside (e) {
+        if(this.state.error || this.state.titleUnique){
+            this.setState(() => ({error: '', titleUnique: ''}));
+        }
     }
 
     onSubmit(e) {
