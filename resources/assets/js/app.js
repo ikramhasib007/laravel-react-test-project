@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 window.axios = require('axios');
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 
 /**

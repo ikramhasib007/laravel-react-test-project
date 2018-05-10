@@ -31,6 +31,16 @@ class PostForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.id !== this.state.id) {
+            this.setState(() => ({
+                title: nextProps.title,
+                category_id: nextProps.category_id,
+                body: nextProps.body,
+            }));
+        }
+    }
+
     onCategoryChange(e) {
         e.persist();
         this.setState(() => ({category_id: e.target.value}));
