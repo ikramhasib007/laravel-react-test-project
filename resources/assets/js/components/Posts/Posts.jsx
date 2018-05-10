@@ -36,7 +36,6 @@ class Posts extends React.Component {
           post={post}
           editPostHandle={this.editPostHandle}
           feedback={this.updateFeedback}
-          category={this.props.categories.find(category => post.category_id === category.id)}
         />
       ))
     );

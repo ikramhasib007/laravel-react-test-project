@@ -8,7 +8,7 @@ function EditPost ({categories, id, dispatch, feedback, ...rest}) {
     return (
         <PostForm 
             categories={categories}
-            category_id={rest.post.category_id}
+            category_id={parseInt(rest.post.category_id, 10)}
             body={rest.post.body}
             title={rest.post.title}
             id={id}

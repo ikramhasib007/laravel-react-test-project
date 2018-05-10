@@ -12,7 +12,7 @@ function Post(props) {
           onClick={() => props.editPostHandle(props.post)}
           href="#"
         >{props.post.title}</a>
-        <footer className="blockquote-footer">{'props.category.name'} <cite>Category</cite></footer>
+        <footer className="blockquote-footer">{props.post.categoryName} <cite>Category</cite></footer>
       </blockquote>
       <button 
         className="btn btn-danger btn-xs ml-1 mt-1"

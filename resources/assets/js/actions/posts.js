@@ -46,7 +46,7 @@ export const startEditPost = (id, post) => {
   return (dispatch) => {
     return axios.put(`/api/posts/${id}`, post).then((response) => {
       console.log(response);
-      dispatch(editPost(id, post));
+      dispatch(editPost(id, response.data));
     }).catch((error) => {
       console.log(error.message);
     });

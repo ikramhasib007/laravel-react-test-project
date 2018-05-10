@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Category;
 
 class PostsController extends Controller
 {
@@ -16,8 +17,12 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-
-        return response($posts);
+        $allposts = [];
+        foreach($posts as $post){
+            $post->categoryName = Category::find($post->category_id)->name;
+            $allposts[] =$post;
+        }
+        return response($allposts);
     }
 
     /**
@@ -50,6 +55,7 @@ class PostsController extends Controller
         $post->body = $request->body;
         
         $post->save();
+        $post->categoryName = Category::find($post->category_id)->name;
         return response($post);
     }
 
@@ -98,7 +104,7 @@ class PostsController extends Controller
         $post->body = $request->body;
         
         $post->save();
-
+        $post->categoryName = Category::find($post->category_id)->name;
         return $post;
     }
 

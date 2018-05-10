@@ -8,12 +8,12 @@ const postFromPropTypes = {
     categories: propTypes.array.isRequired,
     onSubmit: propTypes.func.isRequired,
     title: propTypes.string,
-    // category_id: propTypes.number,
+    category_id: propTypes.number,
     body: propTypes.string
 };
 const defaultProps = {
     title: '',
-    // category_id: 0,
+    category_id: 0,
     body: ''
 };
 
