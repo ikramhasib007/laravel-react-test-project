@@ -16,4 +16,4 @@ axios.defaults.baseURL = 'http://localhost:3000';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Posts/Posts');
+require('./components/root');

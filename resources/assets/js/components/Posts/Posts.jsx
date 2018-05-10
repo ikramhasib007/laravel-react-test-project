@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import configureStore from '../../store/configureStore';
-import {connect, Provider} from 'react-redux';
-import {startSetPosts} from '../../actions/posts';
+import {connect} from 'react-redux';
 import getVisiblePosts from '../../selectors/posts';
 import AddPost from './AddPost';
 import EditPost from './EditPost';
@@ -16,7 +14,7 @@ class Posts extends React.Component {
       posts: [],
       updates: {}
     }
-
+    console.log('-------props------',props);
     this.removePostHandle = this.removePostHandle.bind(this);
     this.editPostHandle = this.editPostHandle.bind(this);
     this.updateSuccessful = this.updateSuccessful.bind(this);
@@ -91,22 +89,7 @@ class Posts extends React.Component {
   }
 }
 
-const store = configureStore();
-
-// const myPosts = store.getState();
-// const getAllVisiblePosts = getVisiblePosts(myPosts.posts, myPosts.filters);
-// console.log(getAllVisiblePosts);
-
-export default connect()(Posts);
-
-const jsx = (
-  <Provider store={store}>
-    <Posts />
-  </Provider>
-);
-
-store.dispatch(startSetPosts());
-
-if (document.getElementById("app")) {
-  ReactDOM.render(jsx, document.getElementById("app"));
-}
+const mapStateToProps = (state) => ({
+  posts: getVisiblePosts(state.posts, state.filters)
+});
+export default connect(mapStateToProps)(Posts);
