@@ -11,26 +11,12 @@ class Posts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: this.props.categories || [],
-      posts: this.props.posts || [],
       updates: {}
     }
     
-    this.removePostHandle = this.removePostHandle.bind(this);
     this.editPostHandle = this.editPostHandle.bind(this);
     this.updateSuccessful = this.updateSuccessful.bind(this);
   }  
-
-  removePostHandle(id) {
-    console.log(id);
-    // axios.delete(`/api/posts/${id}`).then((response) => {
-    //   this.setState(() => ({
-    //     posts: this.state.posts.filter(post => post.id !== id)
-    //   }));
-    // }).catch((error) => {
-    //   console.log(error.message);
-    // });
-  }
 
   editPostHandle(post) {
     this.setState(() => ({updates: post}));
@@ -43,13 +29,12 @@ class Posts extends React.Component {
 
   render() {
     const post = (
-      this.state.posts.map((post, i) => (
+      this.props.posts.map((post, i) => (
         <Post 
           key={i}
           post={post}
-          removePostHandle={this.removePostHandle}
           editPostHandle={this.editPostHandle}
-          category={this.state.categories.find(category => post.category_id === category.id)}
+          category={this.props.categories.find(category => post.category_id === category.id)}
         />
       ))
     );
@@ -57,10 +42,10 @@ class Posts extends React.Component {
       <div className="row">
         <div className="col-md-6">
           {!this.state.updates.title ?
-            <AddPost categories={this.state.categories} /> :
+            <AddPost categories={this.props.categories} /> :
             <EditPost 
-              categories={this.state.categories} 
-              updates={this.state.updates}
+              categories={this.props.categories} 
+              id={this.state.updates.id}
               updated={this.updateSuccessful}
             />
           }

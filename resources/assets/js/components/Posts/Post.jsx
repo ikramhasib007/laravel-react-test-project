@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { startRemovePost } from '../../actions/posts';
 
 function Post(props) {
   return (
@@ -10,11 +12,11 @@ function Post(props) {
           onClick={() => props.editPostHandle(props.post)}
           href="#"
         >{props.post.title}</a>
-        <footer className="blockquote-footer">{props.category.name} <cite>Category</cite></footer>
+        <footer className="blockquote-footer">{'props.category.name'} <cite>Category</cite></footer>
       </blockquote>
       <button 
         className="btn btn-danger btn-xs ml-1 mt-1"
-        onClick={() => props.removePostHandle(props.post.id)}
+        onClick={() => props.dispatch(startRemovePost(props.post.id))}
       >X</button>
       </dt>
       <dd className="col-sm-12 mb-0">
@@ -24,4 +26,4 @@ function Post(props) {
   );
 }
 
-export default Post;
+export default connect()(Post);

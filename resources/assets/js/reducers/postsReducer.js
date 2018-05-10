@@ -3,7 +3,7 @@ const postsReducerDefaultState = [];
 const postsReducer = (state=postsReducerDefaultState, action) => {
   switch(action.type) {
     case 'ADD_POST':
-      return [...state, action.post];
+      return [action.post, ...state];
     case 'REMOVE_POST':
       return state.filter(post => post.id !== action.id)
     case 'EDIT_POST': 

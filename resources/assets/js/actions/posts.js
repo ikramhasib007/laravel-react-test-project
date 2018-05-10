@@ -13,7 +13,8 @@ export const startAddPost = (postData = {}) => {
   } = postData;
   const post = {title, category_id, body, created_at};
   return (dispatch) => {
-    return axios.post('/api/posts', post).then(() => {
+    return axios.post('/api/posts', post).then((response) => {
+      console.log(response);
       dispatch(addPost(post));
     }).catch((error) => {
       console.log(error.message);
@@ -44,7 +45,8 @@ export const editPost = (id, updates) => ({
 // Start edit post
 export const startEditPost = (id, post) => {
   return (dispatch) => {
-    return axios.put(`/api/posts/${id}`, post).then(() => {
+    return axios.put(`/api/posts/${id}`, post).then((response) => {
+      console.log(response);
       dispatch(editPost(id, post));
     }).catch((error) => {
       console.log(error.message);

@@ -4,41 +4,24 @@ import {connect} from 'react-redux';
 import { startEditPost } from '../../actions/posts';
 
 
-class EditPost extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            updates: this.props.updates,
-            completed: false
-        }
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.updates !== this.state.updates;
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log('componentDidUpdate');
-        this.setState(() => ({
-            updates: this.props.updates
-        }));
-    }
-
-    render() {
-        return (
-            <PostForm 
-              categories={this.props.categories}
-              {...this.props.post} 
-              onSubmit={(post) => {
-                  this.props.dispatch(startEditPost(this.props.updates.id, post))
-                  this.props.updated()
-              }}
-            />
-        );
-    }
+function EditPost ({categories, id, dispatch, updated, ...rest}) {
+    return (
+        <PostForm 
+            categories={categories}
+            category_id={parseInt(rest.post.category_id, 10)}
+            body={rest.post.body}
+            title={rest.post.title}
+            onSubmit={(post) => {
+                dispatch(startEditPost(id, post)).then(() => {
+                updated()
+                })
+            }}
+        />
+    );
 }
+
 const mapStateToProps = (state, props) => ({
-    post: state.posts.find((post) => post.id === props.updates.id)
+    post: state.posts.find((post) => post.id === props.id)
 });
 
 export default connect(mapStateToProps)(EditPost);
