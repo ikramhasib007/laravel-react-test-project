@@ -7,7 +7,7 @@
 
 
 ## Installtion
-- Download the resouece
+- Download the resoueces
 - Open command prompt and navigate the project root in your command prompt
 - Make sure composer install on your pc by using command on your prompt
 ```
