@@ -1,6 +1,8 @@
 # Laravel-React Test Project with Redux
 > Ikram - Ud - Daula
-<p>Software Developer</p>
+
+> Software Developer
+
 > Some Others React.js related crafting [React.js & Redux demo](https://ikram-ud-daula.herokuapp.com/)
 
 
@@ -32,14 +34,21 @@ php artisan serve
 Then hit `http://localhost:8000` on your browser.
 
 ## Documentation
-<p>This project is **CRUD** based **SPA** test project using *Laravel 5.6*, *Bootstrap 4*, *React.js & Redux*.</p>
-<p>User can add a post, edit a post, delete a post, seraching a post</p>
-<p>Remembering that the post title is unique. you can't add duplicate post title.</p>
-<p>The add post form are properly validated. You can't ignore the validation rules</p>
-<br/>
+This project is **CRUD** based **SPA** test project using *Laravel 5.6*, *Bootstrap 4*, *React.js & Redux*.
+
+User can add a post, edit a post, delete a post, seraching a post.
+
+Remembering that the post title is unique. you can't add duplicate post title.
+
+The add post form are properly validated. You can't ignore the validation rules.
+
+
+
 ## Description
-<p>This test project covered possible all of the requirement that you have provided.</p>
-**I have used**<br/>
+This test project covered possible all of the requirement that you have provided.
+
+**I have used**
+
 - *laravel 5.6* latest version.
 - Implemented some migration flow with relationships.
 - DB seeding for some dummy post category.
@@ -47,7 +56,7 @@ Then hit `http://localhost:8000` on your browser.
 - *Bootstrap 4* with customization
 - Multiple *Git* commit for tracking 
 - I have completed Laravel and React.js part almost One and a half hours, which are not satisfying your requirement.
-- Redux part took some time from me. I am not using Redux repository from Git which is they recommended. But I implemented a complete store for this test project with filtering, sorting, and sort between date which are not visualize but functionaly implementated. You may check the resource.
+- *Redux* part took some time from me. I am not using Redux repository from Git which is they recommended. But I implemented a complete store for this test project with filtering, sorting, and sort between date which are not visualize but functionaly implementated. You may check the resources.
 ```
 resources\assets\js 
                    \actions
