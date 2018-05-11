@@ -69,6 +69,7 @@ resources\assets\js
 Thank you for your time and consideration. I look forward to speaking with you about this opportunity. 
 
 
+
 Sincerely,
 
 Ikram – Ud – Daula
