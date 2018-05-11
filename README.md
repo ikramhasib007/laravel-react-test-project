@@ -66,10 +66,11 @@ resources\assets\js
  - This implementation of *Redux* is self-created using `redux` and `react-redux` node module.
 > Some Others *React.js* & *Redux* related crafting, please visit [React.js & Redux demo](https://ikram-ud-daula.herokuapp.com/)
 
-> Thank you for your time and consideration. I look forward to speaking with you about this opportunity. 
+Thank you for your time and consideration. I look forward to speaking with you about this opportunity. 
 
- 
+
 Sincerely,
+
 Ikram – Ud – Daula
 
 
