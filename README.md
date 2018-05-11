@@ -17,7 +17,6 @@ composer -v
 ```
 composer install
 npm install
-
 ```
 - Create a Database on your local server and configure database & credential in **.env** file.
 ```
